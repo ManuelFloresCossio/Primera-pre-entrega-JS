@@ -1,10 +1,13 @@
-/* Segunda pre-entrega con al menos:
+/* Tercera pre-entrega con al menos:
 1 función
 1 ciclo
 1 condicional
 1 objeto
 1 array
 1 método de búsqueda y filtrado (funciones de orden superior)
+-Manipulación del DOM
+1 Evento
+-JSON y Storage
 */
 
 // Objeto para representar un evento de cuenta regresiva
@@ -33,16 +36,13 @@ function buscarParticipante(nombre) {
   return participantes.find((participante) => participante.nombre === nombre);
 }
 
-// Función para una cuenta regresiva desde un número dado (relacionado con la duración del evento)
+// Función para una cuenta regresiva desde un número dado
 function cuentaRegresiva(n) {
   console.log(
     `Cuenta regresiva para el evento "${evento.nombre}" que dura ${evento.duracion} días.`
   );
-  // Bucle para contar hacia atrás desde n hasta 0
   for (let i = n; i >= 0; i--) {
-    console.log(i); // Imprimir el número actual
-
-    // Condicional para verificar si ha llegado a 0
+    console.log(i);
     if (i === 0) {
       console.log(
         `¡Cuenta regresiva terminada para el evento "${evento.nombre}"!`
@@ -51,11 +51,36 @@ function cuentaRegresiva(n) {
   }
 }
 
-// Ejemplo de uso de la cuenta regresiva
-cuentaRegresiva(evento.duracion); // Ejecutar la cuenta regresiva con la duración del evento
+cuentaRegresiva(evento.duracion);
 
-// Filtrar participantes mayores de 30 años
+// Filtrar los participantes mayores de 30 años
 console.log("Participantes mayores de 30:", filtrarPorEdad(30));
 
-// Buscar un participante por nombre
-console.log("Buscar a Juan:", buscarParticipante("Juan"));
+// DOM
+function mostrarResultados(resultado) {
+  const resultadosDiv = document.getElementById("resultados");
+  resultadosDiv.innerHTML = ""; // Limpiar resultados previos
+
+  if (resultado) {
+    const { nombre, rol, edad } = resultado;
+    resultadosDiv.innerHTML = `<p>Participante encontrado: ${nombre}, Rol: ${rol}, Edad: ${edad}</p>`;
+  } else {
+    resultadosDiv.innerHTML = `<p>No se encontró al participante.</p>`;
+  }
+}
+
+// Evento para buscar participante
+document.getElementById("buscarBtn").addEventListener("click", () => {
+  const nombreInput = document.getElementById("nombreParticipante").value;
+  const participante = buscarParticipante(nombreInput);
+  mostrarResultados(participante);
+});
+
+// Guardar participantes en localStorage como JSON
+localStorage.setItem("participantes", JSON.stringify(participantes));
+
+// Recuperar participantes del localStorage
+const participantesGuardados = JSON.parse(
+  localStorage.getItem("participantes")
+);
+console.log("Participantes guardados:", participantesGuardados);
