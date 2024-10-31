@@ -1,0 +1,6 @@
+[
+  { "nombre": "Juan", "rol": "Desarrollador", "edad": 30 },
+  { "nombre": "Ana", "rol": "Community Manager", "edad": 25 },
+  { "nombre": "Carlos", "rol": "Director Creativo", "edad": 35 },
+  { "nombre": "Lucía", "rol": "Tester", "edad": 29 }
+]
